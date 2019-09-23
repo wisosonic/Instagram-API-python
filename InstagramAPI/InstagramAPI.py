@@ -868,6 +868,22 @@ class InstagramAPI:
                            '_csrftoken': self.token})
         return self.SendRequest('friendships/show/' + str(userId) + '/', self.generateSignature(data))
 
+    def approveFriendship(self, userId):
+        data = json.dumps({'_uuid': self.uuid,
+                           '_uid': self.username_id,
+                           'user_id': userId,
+                           '_csrftoken': self.token,
+                           'radio_type': 'wifi-none'})
+        return self.SendRequest('friendships/approve/' + str(userId) + '/', self.generateSignature(data))
+
+    def rejectFriendship(self, userId):
+        data = json.dumps({'_uuid': self.uuid,
+                           '_uid': self.username_id,
+                           'user_id': userId,
+                           '_csrftoken': self.token,
+                           'radio_type': 'wifi-none'})
+        return self.SendRequest('friendships/ignore/' + str(userId) + '/', self.generateSignature(data))
+
     def getLikedMedia(self, maxid=''):
         return self.SendRequest('feed/liked/?max_id=' + str(maxid))
 
